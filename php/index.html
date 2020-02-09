@@ -26,7 +26,7 @@
     
     <header>
       <nav>
-        <img id="bannerLogo" src="/img/logoTransparentBgPng.png" alt="The logo of the dojo"/>
+        <img id="bannerLogo" src="img/logoTransparentBgPng.png" alt="The logo of the dojo"/>
         <ul id="menu">
           <li class="menuBtn"><a href="#">Főoldal</a></li>
           <li class="menuBtn"><a href="#">Aikido</a></li>
@@ -70,7 +70,7 @@
       </div>
     </article>
     
-    <img id="backgroundImg" src="/img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>
+    <img id="backgroundImg" src="img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>
     
     <footer>
       
