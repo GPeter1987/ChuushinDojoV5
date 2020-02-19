@@ -12,8 +12,17 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-      <!-- CSS ==> font-family: 'Roboto', sans-serif; -->
-    
+    <!-- CSS ==> font-family: 'Roboto', sans-serif; -->
+      <!-- Header CSS -->
+    <link rel="stylesheet" type="text/css" href="/php/css/header.css">
+      <!-- Body CSS -->
+    <link rel="stylesheet" type="text/css" href="/php/css/bodyBg.css">
+      <!-- Slideshow CSS -->
+    <link rel="stylesheet" type="text/css" href="/php/css/slideshow.css">
+      <!-- Content CSS -->
+    <link rel="stylesheet" type="text/css" href="/php/css/content.css">
+      <!-- Footer CSS -->
+    <link rel="stylesheet" type="text/css" href="">
     <!-- Used colors ==> Grey: #E9EBEE, White: #FFFFFF, Blue: #36374B  -->
     
     <!-- FontAwesome link -->
@@ -37,6 +46,7 @@
     </header>
     
     <div id="slideShow">
+      <img class="slidePic" name="slide"/>
     </div>
     
     <article>
@@ -59,8 +69,9 @@
         <div id="rightSection" class="innerSections">
           <h3 class="sectionTitle">Közösségi oldalaink</h3>
           <p class="sectionDescription">
-            <a href="#"><i class="fab fa-facebook-square"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a class="socialMediaIcon" href="#"><i class="fab fa-facebook-square"></i></a>
+            <br/>
+            <a class="socialMediaIcon" href="#"><i class="fab fa-instagram"></i></a>
           </p>
         </div>
       </div>
@@ -72,5 +83,11 @@
       
       <p id="copyRightText">Some Copyright text.</p>
     </footer>
+    
+    <script src="/php/includes/js/slideShow.js"></script>
+    <script>
+      window.onload = changePic;
+    </script>
+    
   </body>
 </html>
