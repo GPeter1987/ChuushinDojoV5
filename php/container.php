@@ -13,7 +13,16 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
       <!-- CSS ==> font-family: 'Roboto', sans-serif; -->
-    
+      <!-- Header CSS -->
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+      <!-- Body CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bodyBg.css">
+      <!-- Slideshow CSS -->
+    <link rel="stylesheet" type="text/css" href="css/slideshow.css">
+      <!-- Content CSS -->
+    <link rel="stylesheet" type="text/css" href="css/content.css">
+      <!-- Footer CSS -->
+    <link rel="stylesheet" type="text/css" href="">
     <!-- Used colors ==> Grey: #E9EBEE, White: #FFFFFF, Blue: #36374B  -->
     
     <!-- FontAwesome link -->
@@ -30,7 +39,7 @@
     
     <div id="slideShow">
       
-      <img name="slide" width="400" height="400"/>
+      <!--<img name="slide" width="400" height="400"/>-->
       
     </div>
     
@@ -41,7 +50,7 @@
     ?>
     </article>
     
-    <img id="backgroundImg" src="img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>
+    <!--<img id="backgroundImg" src="img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>-->
     
     <?php
       include_once("content/footer.php");
@@ -51,7 +60,7 @@
     
       <script>
       
-        window.onload = changePic;
+        //window.onload = changePic;
         
       </script>
     

@@ -16,8 +16,8 @@
   <div id="rightSection" class="innerSections">
     <h3 class="sectionTitle">Közösségi oldalaink</h3>
     <p class="sectionDescription">
-      <a href="#"><i class="fab fa-facebook-square"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a class="socialMediaIcon" href="#"><i class="fab fa-facebook-square"></i></a>
+      <a class="socialMediaIcon" href="#"><i class="fab fa-instagram"></i></a>
     </p>
   </div>
 </div>
