@@ -40,7 +40,7 @@
   <body>
     
     <?php
-      include_once("content/header.php");
+      include_once(CONTENT_DIR."/header.php");
     ?>
     
     <div id="slideShow">
@@ -59,7 +59,7 @@
     <!--<img id="backgroundImg" src="img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>-->
     
     <?php
-      include_once("content/footer.php");
+      include_once(CONTENT_DIR."/footer.php");
     ?>
     
     <script src = "includes/js/slideShow.js"> </script>
