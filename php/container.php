@@ -1,3 +1,9 @@
+<?php
+  if(isset($_GET["pid"])){
+    if(!$page->pageExists($_GET["pid"]))
+      header("location: ?pid=404");
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -46,7 +52,7 @@
     <article>
     <?php
       echo "<h1>".$page->getTitle()."</h1>";
-      include_once("content/".$page->getFileName());
+      include_once(CONTENT_DIR."/".$page->getFileName());
     ?>
     </article>
     
@@ -56,13 +62,13 @@
       include_once("content/footer.php");
     ?>
     
-      <script src = "includes/js/slideShow.js"> </script>
+    <script src = "includes/js/slideShow.js"> </script>
+  
+    <script>
     
-      <script>
+      //window.onload = changePic;
       
-        //window.onload = changePic;
-        
-      </script>
+    </script>
     
   </body>
 </html>
