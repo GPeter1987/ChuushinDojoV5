@@ -51,8 +51,16 @@
     
     <article>
     <?php
-      echo "<h1>".$page->getTitle()."</h1>";
-      include_once(CONTENT_DIR."/".$page->getFileName());
+      if(isset($_GET["redirect"])){
+        $redirect=$conn->real_escape_string($_GET["redirect"]);
+        if(file_exists(CONTENT_DIR."/".$redirect.".php"))
+          include_once(CONTENT_DIR."/".$redirect.".php");
+        else header("location: ?pid=404");
+      }
+      else{
+        echo "<h1>".$page->getTitle()."</h1>";
+        include_once(CONTENT_DIR."/".$page->getFileName());
+      }
     ?>
     </article>
     

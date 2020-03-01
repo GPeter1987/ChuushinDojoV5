@@ -1,4 +1,21 @@
 <?php
+  //teszt jelszó tesztusernél: teszt1234
+  include_once("includes/config/initial.php");
+  $user="tesztuser";
+  $pass="teszt1234";
+  $sql="select * from users_teszt where felhasznalonev='$user'";
+  $res=$conn->query($sql) or die($conn->error);
+  if($res->num_rows){
+    $row=$res->fetch_assoc();
+    $salt=$row["so"];
+    $dbPass=$row["jelszo"];
+    if(crypt($pass,$salt)==$dbPass)
+      echo "Sikeres bejelentkezés.";
+    else echo "Helytelen jelszó!";
+  }
+  else echo "Nincs ".$user." nevű felhasználó.";
+  exit();
+  
   if(isset($_POST["pass"])){
     $jelszo=$_POST["pass"];
     
@@ -12,9 +29,8 @@
     <input type="text" name="pass" placeholder="Jelszó" value="<?php if(isset($_POST["pass"])) echo $_POST["pass"]; ?>" />
     <input type="submit" value="Próba" name="submit" />
   </form>
-<?php
-  exit();
   
+<?php
   $beiratkozas=strtotime("2019-05-04");
   $szuletes=strtotime(date("Y-m-d"));//strtotime("2019-05-3");
   $mp=$beiratkozas-$szuletes;
