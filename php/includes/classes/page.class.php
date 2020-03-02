@@ -16,24 +16,28 @@
       
       //if there is a requested page, get the required information
       if(isset($_GET["pid"])) $pid=$conn->real_escape_string($_GET["pid"]);
-      $sql="select * from ".PAGES." where id=$pid and jogok like '".$this->permissions."'";
-      $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
-
-      if($res->num_rows){
-        $this->id=$pid;
-        $data=$res->fetch_assoc();
-        $this->fileName=$data["fajlnev"];
-        $this->title=$data["cim"];
+      
+      if(is_numeric($pid)){
+        $sql="select * from ".PAGES." where id=$pid and jogok like '".$this->permissions."'";
+        $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
+  
+        if($res->num_rows){
+          $this->id=$pid;
+          $data=$res->fetch_assoc();
+          $this->fileName=$data["fajlnev"];
+          $this->title=$data["cim"];
+        }
+        else{
+          $this->id=404;
+          $this->title="404";
+          $this->fileName=PAGE_404;
+        }
       }
-      else{
-        $this->id=0;
-        $this->title="sfsdfah";
-        $this->fileName="justrandomstring0124";
-      }
+      
       if(!file_exists("content/".$this->fileName)){
         $this->id=404;
         $this->title="404";
-        $this->fileName="nemtalalhato.php";
+        $this->fileName=PAGE_404;
       }
     }
     
@@ -64,6 +68,20 @@
         $output.="\"><a href=\"?pid=".$row["id"]."\" title=\"".$row["leiras"]."\">".$row["cim"]."</a></li>";
       }
       return $output;
+    }
+    
+    public function pageExists($page_id=1){
+      global $conn;
+
+      if(is_numeric($page_id)){
+        $sql="select id from ".PAGES." where id=".$page_id;
+        $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
+        
+        if($res->num_rows)
+          return true;
+        else return false;
+      }
+      return false;
     }
     
     public function redirect($pid, $permissions){
