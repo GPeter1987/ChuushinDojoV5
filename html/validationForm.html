@@ -1,25 +1,30 @@
-<form>
+<form onsubmit="return validate()">
   <table>
     <caption><h2>Regisztráció</h2></caption>
     
       <tr>
         <td><p>Felhasználónév:</p></td>
-        <td><input id="username" type="text" /></td>
+        <td><input id="username" type="text" placeholder="Felhasználónév" required /></td>
       </tr>
     
       <tr>
         <td> <p>Teljes név:</p></td>
-        <td><input id="realName" type="text" /></td>
+        <td><input id="realName" type="text" placeholder="Név" required /></td>
+      </tr>
+    
+      <tr>
+        <td> <p>E-mail:</p></td>
+        <td><input id="emailAddress" type="text" placeholder="E-mail cím" required /></td>
       </tr>
     
       <tr>
         <td> <p>Jelszó:</p></td>
-        <td><input id="password" type="text" /></td>
+        <td><input id="password" type="text" placeholder="Jelszó" required  /></td>
       </tr>
     
       <tr>
         <td><p>Jelszó még egyszer:</p></td>
-        <td><input id="passwordAgain" type="text" /></td>
+        <td><input id="passwordAgain" type="text" placeholder="Jelszó megerősítése" required  /></td>
       </tr>
     
       <tr>
@@ -34,5 +39,31 @@
     
   </table>
   
+  <script>
+    function validate() {
+      var username = document.getElementById("username");
+      var realName = document.getElementById("realName");
+      var email = document.getElementById("emailAddress");
+      var password = document.getElementById("password");
+      var passwordAgain = document.getElementById("passwordAgain");
+      var dateOfBirth = document.getElementById("dateOfBirth");
+      
+      username.value // Ez adja meg a beírt témát 
+      //  A spaceket a .trim() -el tudom kizárni.
+      //  Vissza kell ,hogy adjunk egy boolean értéket
+    }
+    //  Usernamek validálása
+    function validateUsername(username) {
+      //  Min 5 karakter
+      //  Csak btűvel kezdődhet
+      //  Tartalmazzon számot
+      //  Tartalmazzon pontot
+      //  Tartalmazzon alulvonást
+      //  Csak ékezet nélküli betűk
+      //  Csak kis betűk
+      
+    }
+    
+  </script>
   
 </form>
