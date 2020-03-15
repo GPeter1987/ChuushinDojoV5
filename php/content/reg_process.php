@@ -11,9 +11,6 @@
 		$validated=$user->validateRegister($_POST);
 		if($validated){
 			$user->register($validated);
-			/*foreach($validated as $attr => $val){
-				echo $attr.": ".$val."<br />";
-			}*/
 		}
 		else{
 			header("location: ../index.php?pid=".$_POST["reg_id"]);

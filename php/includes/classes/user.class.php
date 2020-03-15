@@ -124,7 +124,7 @@
             //if not, it's in wrong format
             if(strpos($val," ")===false){
               $success=false;
-              $msg="Hiba: hiányzó vezetéknév vagy keresztnév!";
+              $msg="Hiba: Hiányzó vezetéknév vagy keresztnév!";
             }
             else{
               $tmp=explode(" ",mb_strtolower($val));
@@ -132,6 +132,13 @@
               $tmp[1][0]=mb_strtoupper($tmp[1][0]);
               $modData[$attr_name]=implode(" ",$tmp);
               $val=implode(" ",$tmp);
+            }
+          }
+          else if($attr_name=="email"){
+            //check e-mail format
+            if(!filter_var($val, FILTER_VALIDATE_EMAIL)){
+              $success=false;
+              $msg="Hiba: Az e-mail cím formátuma nem megfelelő!";
             }
           }
           else if($attr_name=="birthYear"){
@@ -217,13 +224,17 @@
       $salt=time();
       $pass=crypt($data["reg_pass"],$salt);
       $name=$data["fullName"];
+      $email=$data["email"];
       $birthDate=$data["birthDate"];
       
-      $sql = "insert into ".USERS." (felhasznalonev, jelszo, so, nev, szuletesi_datum)
-      values ('$user','$pass',$salt,'$name','$birthDate')";
+      $sql = "insert into ".USERS." (felhasznalonev, jelszo, so, nev, email, szuletesi_datum)
+      values ('$user','$pass',$salt,'$name','$email','$birthDate')";
       $res = $conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
       
-      if($res) header("location: ../index.php?redirect=reg_state");
+      if($res){
+        $_SESSION["reg_success"]=true;
+        header("location: ../index.php?redirect=reg_state");
+      }
     }
     
     public function logout(){
