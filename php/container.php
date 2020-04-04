@@ -4,43 +4,8 @@
       header("location: ?pid=404");
   }
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><?php echo $page->getTitle()." | "; ?>Chuushin Dojo</title> 
-    <meta name="TITLE" content="Chuushin Dojo"/>
-    <meta name="DESCRIPTION" content="Ceglédi aikido dojo honlapja."/>
-    <meta name="KEYWORDS" content="aikido, sport, cegléd, cegled, testmozgás, kard, bot, harcművészet, harcmuveszet, edzes, edzés"/>
-    <meta name="CONTENT-TYPE" charset="utf-8"/>
-    <meta name="ROBOTS" content="index"/>
-    <meta name="AUTHOR" content="Chuushin Dojo"/>
-    <meta name="COPYRIGHT" content="Chuushin Dojo"/>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
-      <!-- CSS ==> font-family: 'Roboto', sans-serif; -->
-      <!-- Header CSS -->
-    <link rel="stylesheet" type="text/css" href="css/header.css">
-      <!-- Body CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bodyBg.css">
-      <!-- Slideshow CSS -->
-    <link rel="stylesheet" type="text/css" href="css/slideshow.css">
-      <!-- Content CSS -->
-    <link rel="stylesheet" type="text/css" href="css/content.css">
-      <!-- Footer CSS -->
-    <link rel="stylesheet" type="text/css" href="">
-    <!-- Used colors ==> Grey: #E9EBEE, White: #FFFFFF, Blue: #36374B  -->
-    
-    <!-- FontAwesome link -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-    
-    
-  </head>
-  
-  <body>
-    
     <?php
-      include_once(CONTENT_DIR."/header.php");
+      include_once($contentDir."/header.php");
     ?>
     
     <div id="slideShow">
@@ -52,14 +17,17 @@
     <article>
     <?php
       if(isset($_GET["redirect"])){
-        $redirect=$conn->real_escape_string($_GET["redirect"]);
-        if(file_exists(CONTENT_DIR."/".$redirect.".php"))
-          include_once(CONTENT_DIR."/".$redirect.".php");
+        $redirect=sanitize($_GET["redirect"]);
+        if(file_exists($contentDir."/".$redirect.".php"))
+          include_once($contentDir."/".$redirect.".php");
         else header("location: ?pid=404");
       }
       else{
-        echo "<h1>".$page->getTitle()."</h1>";
-        include_once(CONTENT_DIR."/".$page->getFileName());
+        if($user->hasAccess($page->getPid()) || $page->getTitle()=="404" || $page->getTitle()=="Tagoknak"){
+          echo "<h1>".$page->getTitle()."</h1>";
+          include_once($contentDir."/".$page->getFileName());
+        }
+        else echo "<div>A kért tartalom eléréséhez nincs engedély.</div>";
       }
     ?>
     </article>
@@ -67,16 +35,5 @@
     <!--<img id="backgroundImg" src="img/nishioTransparentPng.png" alt="Nishio sensei is performing a technique with a partner"/>-->
     
     <?php
-      include_once(CONTENT_DIR."/footer.php");
+      include_once($contentDir."/footer.php");
     ?>
-    
-    <script src = "includes/js/slideShow.js"> </script>
-  
-    <script>
-    
-      //window.onload = changePic;
-      
-    </script>
-    
-  </body>
-</html>

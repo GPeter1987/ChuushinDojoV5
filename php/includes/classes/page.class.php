@@ -4,10 +4,12 @@
     private $title;
     private $fileName;
     private $permissions;
+    private $location;
     
     public function __construct($permissions){
       //set default values (home page)
       global $conn;
+      global $contentDir;
       $this->id = 1;
       $this->title = "Főoldal";
       $this->fileName="fooldal.php";
@@ -18,7 +20,9 @@
       if(isset($_GET["pid"])) $pid=$conn->real_escape_string($_GET["pid"]);
       
       if(is_numeric($pid)){
-        $sql="select * from ".PAGES." where id=$pid and jogok like '".$this->permissions."'";
+        //original query
+        //$sql="select * from ".PAGES." where id=$pid and jogok like '".$this->permissions."'";
+        $sql="select * from ".PAGES." where id=".$pid;
         $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
   
         if($res->num_rows){
@@ -34,7 +38,7 @@
         }
       }
       
-      if(!file_exists("content/".$this->fileName)){
+      if(!file_exists($contentDir."/".$this->fileName)){
         $this->id=404;
         $this->title="404";
         $this->fileName=PAGE_404;
@@ -58,6 +62,7 @@
     public function getPageMenu(){
       //generate the page menu
       global $conn;
+      global $rootDir;
       $sql="select * from ".PAGES." where cim<>'' and jogok like '".$this->permissions."' order by id";
       $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
       $output="";
@@ -65,7 +70,7 @@
       while($row=$res->fetch_assoc()){
         $output.="<li class=\"menuBtn";
         if($row["id"]==$this->id) $output.=" current_page_item\"";
-        $output.="\"><a href=\"?pid=".$row["id"]."\" title=\"".$row["leiras"]."\">".$row["cim"]."</a></li>";
+        $output.="\"><a href=\"".$rootDir."?pid=".$row["id"]."\" title=\"".$row["leiras"]."\">".$row["cim"]."</a></li>";
       }
       return $output;
     }

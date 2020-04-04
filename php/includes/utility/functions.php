@@ -12,11 +12,8 @@
 	 */
 	function clearErrors(){
 		foreach($_SESSION as $name => $val){
-			unset($_SESSION[$name]);
-			if(isset($_SESSION[$name])){
-				return false;
-			}
+			if(isset($_SESSION[$name]["err_msg"]))
+				unset($_SESSION[$name]);
 		}
-		return true;
 	}
 ?>
