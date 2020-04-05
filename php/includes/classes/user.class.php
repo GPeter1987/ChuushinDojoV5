@@ -10,7 +10,7 @@
      * Example of guest user permission mask: 1___
      */
     
-    public function __construct() {
+    public function __construct(){
       //set default values
       global $conn;
       $this->id = 0;
@@ -25,31 +25,35 @@
       else{
         //user is trying to log in, if the credentials match, let him/her in
         if(isset($_POST["user"]) and isset($_POST["pass"])){
-          $user = $conn->real_escape_string($_POST["user"]);
-          $pass = $conn->real_escape_string($_POST["pass"]);
-          $sql = "select * from ".USERS." where felhasznalonev='$user'";
-          $res = $conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
-          
-          //if the user exists
-          if($res->num_rows){
-            $data=$res->fetch_assoc();
-            $salt=$data["so"];
-            $dbPass=$row["jelszo"];
+          $user = sanitize($_POST["user"]);
+          $pass = sanitize($_POST["pass"]);
+          if($user!="" && $pass!=""){
+            $sql = "select * from ".USERS." where felhasznalonev='$user'";
+            $res = $conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
             
-            //if the user profile is active
-            if($data["aktiv"]=="1"){
-              //if the passwords match
-              if(crypt($pass,$salt)==$dbPass){
-                $this->id = $data["id"];
-                $this->permissions = $permTable[$data["jog"]];
-                $_SESSION["userid"] = $this->id;
-                $_SESSION["userperm"] = $this->permissions;
+            //if the user exists
+            if($res->num_rows){
+              $data=$res->fetch_assoc();
+              $salt=$data["so"];
+              $dbPass=$data["jelszo"];
+              
+              //if the user profile is active
+              if($data["aktiv"]=="1"){
+                //if the passwords match
+                if(crypt($pass,$salt)==$dbPass){
+                  $this->id = $data["id"];
+                  $this->permissions = $permTable[$data["jog"]];
+                  $_SESSION["userid"] = $this->id;
+                  $_SESSION["userperm"] = $this->permissions;
+                  $this->setMsg("<div class='siker'>Sikeres bejelentkezés.</div>");
+                }
+                else $this->setMsg("<div class='hiba'>Helytelen felhasználónév vagy jelszó!</div>");
               }
-              else $msg="Helytelen felhasználónév vagy jelszó!";
+              else $this->setMsg("<div class='hiba'>A felhasználó (még) inaktív! Adminisztrátori jóváhagyás szükséges.</div>");
             }
-            else $msg="A felhasználó (még) inaktív! Adminisztrátori jóváhagyás szükséges.";
+            else $this->setMsg("<div class='hiba'>Helytelen felhasználónév vagy jelszó!</div>");
           }
-          else $msg="Helytelen felhasználónév vagy jelszó!";
+          else $this->setMsg("<div class='hiba'>A bejelentkezési adatok kitöltése kötelező!</div>");
         }
       }
     }
@@ -84,6 +88,23 @@
         else $name="Nincs név.";
       }
       return $name;
+    }
+    
+    public function getData(){
+      global $conn;
+      
+      if($this->id == 0){
+        return false;
+      }
+      else{
+        $sql = "select * from ".USERS." where id=".$this->id;
+        $res = $conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
+        if($res->num_rows){
+          $data=$res->fetch_assoc();
+        }
+        else return false;
+      }
+      return $data;
     }
     
     public function validateRegister($data){
@@ -237,11 +258,41 @@
       }
     }
     
+    public function setMsg($msg){
+      $_SESSION["msg"]=$msg;
+    }
+    
+    public function getMsg(){
+      if(isset($_SESSION["msg"])) return $_SESSION["msg"];
+      else return "";
+    }
+    
+    public function clearMsg(){
+      unset($_SESSION["msg"]);
+    }
+    
+    public function hasAccess($pid){
+      global $conn;
+      
+      if(is_null($pid))
+        return false;
+      
+      $perm=$this->getPermissions();
+      $sql = "select * from ".PAGES." where id=$pid and jogok like '".$perm."'";
+      $res=$conn->query($sql) or die($conn->error." on line <b>".__LINE__."</b>");
+
+      if($res->num_rows)
+        return true;
+      else
+        return false;
+    }
+    
     public function logout(){
       unset($_SESSION["userid"]);
       unset($_SESSION["userperm"]);
       $this->id = 0;
       $this->permissions = "1___";
+      $this->setMsg("<div class='siker'>Sikeres kijelentkezés.</div>");
     }
   }
 ?>
