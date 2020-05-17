@@ -9,15 +9,15 @@
   A tagoknak szánt tartalom bejelentkezés után lesz elérhető.
   Jelentkezz be az alábbi űrlapon keresztül.
 </p>
-<form method="post" action="?pid=6">
+<form method="post" action="?pid=3">
   <table>
 	<tr><td>Felhasználónév: </td><td><input type="text" name="user" /></td></tr>
 	<tr><td>Jelszó: </td><td><input type="password" name="pass" /></td></tr>
 	<tr><td colspan="2"><input type="submit" name="submit-login" value="Bejelentkezés" /></td></tr>
   </table>
 </form>
+<a href="forgotten-password">Elfelejtett jelszó</a>
 <?php
-  echo $user->getMsg();
+  $user->getMsg();
   $user->clearMsg();
 ?>
-<a href="forgotten-password">Elfelejtett jelszó</a>

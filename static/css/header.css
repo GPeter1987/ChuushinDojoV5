@@ -1,0 +1,45 @@
+header {
+  height: 10vh;
+  background-color: #e9ebee;
+}
+
+#bannerLogo {
+  height: 20vh;
+  position: relative;
+  top: -5vh;
+}
+
+#menu {
+  position: relative;
+  float: right;
+  margin-top: 0;
+  padding-top: 0;
+  top: 2.5vh;
+}
+
+.menuBtn {
+  display: inline;
+  margin-top: 0;
+  padding-top: 0;
+  margin-right: 3.5vh;
+  
+}
+
+.menuBtn a {
+  text-decoration: none;
+  color: #36374b;
+  font-family: 'Roboto', sans-serif;
+  font-size: 4vh;  
+}
+
+.menuBtn a:hover {
+  padding-left:15px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-left: 4px solid #36374b;
+  border-right: 4px solid white;
+  border-bottom: 4px solid #36374b;
+  border-top: 4px solid white;
+  transition: 0.8s;
+}

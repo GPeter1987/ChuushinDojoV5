@@ -8,12 +8,6 @@
       include_once($contentDir."/header.php");
     ?>
     
-    <div id="slideShow">
-      
-      <!--<img name="slide" width="400" height="400"/>-->
-      
-    </div>
-    
     <article>
     <?php
       if(isset($_GET["redirect"])){
@@ -23,7 +17,7 @@
         else header("location: ?pid=404");
       }
       else{
-        if($user->hasAccess($page->getPid()) || $page->getTitle()=="404" || $page->getTitle()=="Tagoknak"){
+        if($user->hasAccess($page->getPid()) || $page->getTitle()=="404" || $page->getTitle()=="Bejelentkezés"){
           echo "<h1>".$page->getTitle()."</h1>";
           include_once($contentDir."/".$page->getFileName());
         }

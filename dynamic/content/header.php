@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo $page->getTitle()." | "; ?>Chuushin Dojo</title> 
+    <title><?php echo $page->getTitle()." | "; ?>Dojo kezelő</title> 
     <meta name="TITLE" content="Chuushin Dojo"/>
     <meta name="DESCRIPTION" content="Ceglédi aikido dojo honlapja."/>
     <meta name="KEYWORDS" content="aikido, sport, cegléd, cegled, testmozgás, kard, bot, harcművészet, harcmuveszet, edzes, edzés"/>
@@ -53,8 +53,8 @@
     </nav>
   </header>
   <?php
-    if($page->getTitle()!="Tagoknak"){
-      echo $user->getMsg();
+    if($page->getTitle()!="Bejelentkezés"){
+      $user->getMsg();
       $user->clearMsg();
     }
   ?>

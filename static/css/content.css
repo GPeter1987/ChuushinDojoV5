@@ -1,0 +1,50 @@
+article {
+  background-color: antiquewhite;
+}
+
+.sections {
+  max-width: 90vw;
+  padding-left: 5vw;
+  padding-bottom: 25px;
+}
+
+.innerSections {
+  max-width: 25vw;
+  display: inline-block;
+  margin-top: 2vh;
+  padding-left: 3vw;
+  background-color: white;
+}
+
+.sectionTitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.2vw;
+  color:#36374B;
+  padding-right: 2.5vw;
+  text-align: center;
+}
+
+.sectionDescription {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2vw;
+  color:#36374B;
+  padding-right: 2vw;
+  text-align: center;
+}
+
+.socialMediaIcon {
+  font-size: 10vh;
+}
+
+#leftSection {
+  float: left;
+}
+
+#middleSection {
+  margin-left: 2.5vw;
+}
+
+#rightSection {
+  margin-right: 3vw;
+  float: right;
+}

@@ -2,7 +2,7 @@
   $months=["január", "február", "március", "április", "május", "június", "július", "augusztus", "szeptember", "október", "november", "december"];
 ?>
 <p>
-  Amennyiben tagja vagy a Chuushin dojónak, kérlek, regisztrálj az alábbi űrlapon!
+  Amennyiben tagja egy - a rendszer által kezelt - dojónak, kérlek, regisztrálj az alábbi űrlapon!
 </p>
 <p>
   Minden mezőt kötelező kitölteni!

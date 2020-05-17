@@ -1,0 +1,11 @@
+body {
+  max-width: 1200px;
+ // background-color: black;
+}
+
+#backgroundImg {
+  height: 60vh;
+  position: absolute;
+  left: 50vw;
+  top: 65vh
+}

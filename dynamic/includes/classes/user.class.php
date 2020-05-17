@@ -45,15 +45,15 @@
                   $this->permissions = $permTable[$data["jog"]];
                   $_SESSION["userid"] = $this->id;
                   $_SESSION["userperm"] = $this->permissions;
-                  $this->setMsg("<div class='siker'>Sikeres bejelentkezés.</div>");
+                  $this->setMsg("<div class='success'>Sikeres bejelentkezés.</div>");
                 }
-                else $this->setMsg("<div class='hiba'>Helytelen felhasználónév vagy jelszó!</div>");
+                else $this->setMsg("<div class='error'>Helytelen felhasználónév vagy jelszó!</div>");
               }
-              else $this->setMsg("<div class='hiba'>A felhasználó (még) inaktív! Adminisztrátori jóváhagyás szükséges.</div>");
+              else $this->setMsg("<div class='error'>A felhasználó (még) inaktív! Adminisztrátori jóváhagyás szükséges.</div>");
             }
-            else $this->setMsg("<div class='hiba'>Helytelen felhasználónév vagy jelszó!</div>");
+            else $this->setMsg("<div class='error'>Helytelen felhasználónév vagy jelszó!</div>");
           }
-          else $this->setMsg("<div class='hiba'>A bejelentkezési adatok kitöltése kötelező!</div>");
+          else $this->setMsg("<div class='error'>A bejelentkezési adatok kitöltése kötelező!</div>");
         }
       }
     }
@@ -258,13 +258,22 @@
       }
     }
     
+    public function validate($type=null, $val){
+      if(is_null($type)) $type="password";
+      if($type=="password"){
+        if(!preg_match("/^.*(?=.*\d).*(?=.*\d).{8,}$/", $val)){
+          return false;
+        }
+      }
+      return true;
+    }
+    
     public function setMsg($msg){
       $_SESSION["msg"]=$msg;
     }
     
     public function getMsg(){
-      if(isset($_SESSION["msg"])) return $_SESSION["msg"];
-      else return "";
+      if(isset($_SESSION["msg"])) echo $_SESSION["msg"];
     }
     
     public function clearMsg(){
@@ -292,7 +301,7 @@
       unset($_SESSION["userperm"]);
       $this->id = 0;
       $this->permissions = "1___";
-      $this->setMsg("<div class='siker'>Sikeres kijelentkezés.</div>");
+      $this->setMsg("<div class='success'>Sikeres kijelentkezés.</div>");
     }
   }
 ?>
